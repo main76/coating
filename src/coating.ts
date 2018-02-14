@@ -1,22 +1,32 @@
 const symbol = Symbol('coating');
 
+interface wrapper {
+    (...args): Function;
+    args: any[];
+    me: any;
+    origin: Function;
+}
+
 function coating(func: Function, thisArg = null) {
     return internalCoating(func, thisArg, null);
 }
 
-function internalCoating(func: Function, thisArg, args: any[]) {
+function internalCoating(func: Function, thisArg, args: any[]): Function {
     if (!func) {
         throw new Error('Argument "func" is null.');
     }
 
     if (func.length == 0 ||
         Object.getOwnPropertySymbols(func).indexOf(symbol) != -1) {
-        if (thisArg) 
+        if (thisArg)
             return func.bind(thisArg);
         return func;
     }
 
-    let r = function() {
+    let r = function () {
+        if (arguments.length == 0) {
+            return this.origin.apply(this.me, this.args);
+        }
         let required = <number>this.origin.length - this.args.length;
         let args = [];
         for (let i = 0; i < this.args.length; i++) {
@@ -41,18 +51,4 @@ function internalCoating(func: Function, thisArg, args: any[]) {
     return r.bind(r);
 }
 
-interface wrapper {
-    (): any;
-    args: any[];
-    me: any;
-    origin: Function;
-}
-
-function test(a, b, c) {
-    return a + b * c;
-}
-
-let t = coating(test);
-console.log(t(1, 2, 3)); // 7
-console.log(t(1, 2)(3)); // 7
-console.log(t(1)(2)(3)); // 7
+export = coating;

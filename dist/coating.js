@@ -1,12 +1,8 @@
 "use strict";
 const symbol = Symbol('coating');
-let coating = function (func, thisArg = null) {
+function coating(func, thisArg = null) {
     return internalCoating(func, thisArg, null);
-};
-coating.functional = function (target, propertyKey, descriptor) {
-    let func = target[propertyKey];
-    target[propertyKey] = internalCoating(func, target, null);
-};
+}
 function internalCoating(func, thisArg, args) {
     if (!func) {
         throw new Error('Argument "func" is null.');
@@ -18,6 +14,9 @@ function internalCoating(func, thisArg, args) {
         return func;
     }
     let r = function () {
+        if (arguments.length == 0) {
+            return this.origin.apply(this.me, this.args);
+        }
         let required = this.origin.length - this.args.length;
         let args = [];
         for (let i = 0; i < this.args.length; i++) {

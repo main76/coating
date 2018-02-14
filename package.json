@@ -1,14 +1,24 @@
 {
   "name": "coating",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Functional programming with coating.",
+  "main": "dist/coating.js",
+  "types": "dist/coating.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p src && tsc -p test",
+    "test": "node test/index.js"
   },
   "keywords": [
-    "funtional"
+    "functional-programming"
   ],
-  "author": "master",
-  "license": "MIT"
+  "author": "masteryu",
+  "license": "MIT",
+  "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Master76/coating.git"
+  },
+  "devDependencies": {
+    "@types/node": "^9.4.6"
+  }
 }
