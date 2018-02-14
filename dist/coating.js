@@ -14,22 +14,16 @@ function internalCoating(func, thisArg, args) {
         return func;
     }
     let r = function () {
-        if (arguments.length == 0) {
-            return this.origin.apply(this.me, this.args);
-        }
         let required = this.origin.length - this.args.length;
         let args = [];
         for (let i = 0; i < this.args.length; i++) {
             args[i] = this.args[i];
         }
-        if (required > arguments.length) {
-            for (let i = 0; i < arguments.length; i++) {
-                args.push(arguments[i]);
-            }
-            return internalCoating(this.origin, this.me, args);
-        }
-        for (let i = 0; i < required; i++) {
+        for (let i = 0; i < arguments.length; i++) {
             args.push(arguments[i]);
+        }
+        if (required > arguments.length) {
+            return internalCoating(this.origin, this.me, args);
         }
         return this.origin.apply(this.me, args);
     };

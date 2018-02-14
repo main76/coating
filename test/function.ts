@@ -1,16 +1,14 @@
 import coating = require('../dist/coating')
 
-function calculate(a, b, c) {
-    return a + b * c;
+function calculate(a, b, c, d=2) {
+    return (a + b * c) * d;
 }
 
 export default function runTest(assertEqual: (expect: Object, result: Object) => void): number {
-    let result_1 = coating(calculate)(1);
-    let result_1_2 = result_1(2);
-    let result_1_2_3 = result_1_2(3);
-    let expect = calculate(1, 2, 3);
-    assertEqual(expect, result_1_2_3);
-    assertEqual(expect, result_1(2, 3));
+    let result_1_2 = coating(calculate)(1, 2);
+
+    assertEqual(calculate(1, 2, 3), result_1_2(3));
+    assertEqual(calculate(1, 2, 3, 4), result_1_2(3, 4));
 
     return 0;
 }
