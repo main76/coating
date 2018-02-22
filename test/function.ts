@@ -1,4 +1,4 @@
-import coating = require('../dist/coating')
+import coating = require('../dist/coating');
 
 function calculate(a, b, c, d=2) {
     return (a + b * c) * d;

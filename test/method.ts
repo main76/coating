@@ -1,4 +1,4 @@
-import coating = require('../dist/coating')
+import coating = require('../dist/coating');
 
 class foo {
     private mutilpier = 2;
