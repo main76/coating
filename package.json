@@ -1,6 +1,6 @@
 {
   "name": "coating",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Functional programming with coating.",
   "main": "dist/coating.js",
   "types": "dist/coating.d.ts",
