@@ -4,12 +4,12 @@
         "target": "es2017",
         "sourceMap": true,
         "removeComments": true,
-        "declaration": true,
+        "declaration": false,
         "noImplicitAny": false,
         "noEmitOnError": false,
         "outDir": "../dist/"
     },
-    "exclude": [
-        "../node_modules/*"
+    "files": [
+        "coating.ts"
     ]
 }

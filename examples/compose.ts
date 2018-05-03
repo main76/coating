@@ -22,4 +22,3 @@ let sumEvenSqrt = sumFilterMap(isEven, Math.sqrt);
 
 console.log(sumOddSquare([0, 1, 2, 3, 4, 5]));
 console.log(sumEvenSqrt([0, 1, 4, 9, 16, 25]));
-
