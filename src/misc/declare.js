@@ -25,7 +25,8 @@ function main() {
         l.pipe(target, { end: false });
     });
     l.on('end', () => {
-        appendRest('**/\n\n');
+        appendRest('**/\n');
+        appendRest(`\nexport = coating;\n\n`);
         for (let i = 1; i <= MAX_ARGS_LENGTH; i++) {
             writeInterface(i);
         }
@@ -33,7 +34,6 @@ function main() {
             writeMethod(i);
         }
         appendRest(`declare function ${METHOD_NAME}(func: Function, thisArg?: any): Function;\n`);
-        appendRest(`\nexport = coating;\n`);
         target.write(rest.join(''), () => target.close());
     });
 }
@@ -55,10 +55,11 @@ function writeInterfaceName(start, length) {
     writeGeneric(start, length);
 }
 
-function writeArgs(length) {
+function writeArgs(length, optional=false) {
     for (let j = 1; j <= length; j++) {
         appendRest(ARGS_PREFIX + j);
-        appendRest(': ');
+        if (optional) appendRest('?: ');
+        else appendRest(': ');
         appendRest(ARGS_TYPENAME_PREFIX + j);
         if (j != length) {
             appendRest(', ')

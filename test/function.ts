@@ -8,7 +8,7 @@ export default function runTest(assertEqual: (expect: Object, result: Object) =>
     let result_1_2 = coating(calculate)(1, 2);
 
     assertEqual(calculate(1, 2, 3), result_1_2(3));
-    assertEqual(calculate(1, 2, 3, 4), result_1_2(3, 4));
+    assertEqual(calculate(1, 2, 3, 4), (<Function>result_1_2)(3, 4));
 
     return 0;
 }
